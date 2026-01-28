@@ -1,5 +1,5 @@
-from transformers import DonutProcessor, VisionEncoderDecoderModel
 from PIL import Image
+from transformers import DonutProcessor, VisionEncoderDecoderModel
 
 processor = DonutProcessor.from_pretrained("naver-clova-ix/donut-base")
 model = VisionEncoderDecoderModel.from_pretrained("naver-clova-ix/donut-base")
