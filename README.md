@@ -14,27 +14,27 @@ repo/
 ├── data/ 
 │   ├── processed/
 │   │   ├── v1/
+│   │   │   ├── test/
+│   │   │   │   ├── images/
+│   │   │   │   └── labels.csv
+│   │   │   │
 │   │   │   ├── train/
 │   │   │   │   ├── images/
 │   │   │   │   └── labels.csv
 │   │   │   │
-│   │   │   ├── val/
-│   │   │   │   ├── images/
-│   │   │   │   └── labels.csv
-│   │   │   │
-│   │   │   └── train/
+│   │   │   └── val/
 │   │   │       ├── images/
 │   │   │       └── labels.csv
 │   │   ├── v2/
+│   │   │   ├── test/
+│   │   │   │   ├── images/
+│   │   │   │   └── labels.csv
+│   │   │   │
 │   │   │   ├── train/
 │   │   │   │   ├── images/
 │   │   │   │   └── labels.csv
 │   │   │   │
-│   │   │   ├── val/
-│   │   │   │   ├── images/
-│   │   │   │   └── labels.csv
-│   │   │   │
-│   │   │   └── train/
+│   │   │   └── val/
 │   │   │       ├── images/
 │   │   │       └── labels.csv
 │   │   │   
@@ -42,12 +42,17 @@ repo/
 │   │
 │   └── raw/
 │       └── landlord/
-│           ├── test_v2/test                    # Testing Data
-│           ├── train_v2/train                  # Training Data
-│           ├── validation_v2/validation        # Validation Data
-│           ├── written_name_test_v2.csv
-│           ├── written_name_train_v2.csv
-│           └── written_name_validation_v2.csv
+│           ├── test                        # Testing Data
+│           │   ├── images/                  
+│           │   └── label.csv           
+│           │
+│           ├── train                       # Training Data
+│           │   ├── images/                  
+│           │   └── label.csv           
+│           │
+│           └── validation                  # Validation Data
+│               ├── images/                  
+│               └── label.csv         
 │
 ├── preprocessing/                          # Data Transformations
 │   ├── image.py

@@ -23,16 +23,17 @@ rm ./handwriting-data.zip
 
 # Organize Folders and Files
 # --------------------------
-mkdir ../data/raw/landlord/images
-mv ../data/raw/landlord/test_v2/test ../data/raw/landlord/images/test/
-mv ../data/raw/landlord/train_v2/train ../data/raw/landlord/images/train/
-mv ../data/raw/landlord/validation_v2/validation ../data/raw/landlord/images/validation
+mkdir ../data/raw/landlord/test/images
+mkdir ../data/raw/landlord/train/images
+mkdir ../data/raw/landlord/validation/images
 
+mv ../data/raw/landlord/test_v2/test ../data/raw/landlord/test/images/
+mv ../data/raw/landlord/train_v2/train ../data/raw/landlord/train/images/
+mv ../data/raw/landlord/validation_v2/validation ../data/raw/landlord/validation/images
 
-mkdir ../data/raw/landlord/labels
-mv ../data/raw/landlord/written_name_test_v2.csv ../data/raw/landlord/labels/test.csv
-mv ../data/raw/landlord/written_name_train_v2.csv ../data/raw/landlord/labels/train.csv
-mv ../data/raw/landlord/written_name_validation_v2.csv ../data/raw/landlord/labels/validation.csv
+mv ../data/raw/landlord/written_name_test_v2.csv ../data/raw/landlord/test/label.csv
+mv ../data/raw/landlord/written_name_train_v2.csv ../data/raw/landlord/train/label.csv
+mv ../data/raw/landlord/written_name_validation_v2.csv ../data/raw/landlord/validation/label.csv
 
 # ----------------------------------------------------------------------
 # Note:
