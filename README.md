@@ -62,25 +62,28 @@ repo/
 │
 ├── models/                                 # Model Architectures
 │   ├── donut/
-│   │   ├── model.py
+│   │   ├── model.py                        # Encapsulation / Abstraction
 │   │   └── config.py
 │   ├── trocr/
-│   │   ├── model.py
+│   │   ├── model.py                        # Encapsulation / Abstraction
 │   │   └── config.py
 │   └── __init__.py
 │
 ├── training/                               # Training and Evaluation Logic
-│   ├── train_donut.py
-│   ├── train_trocr.py
+│   ├── common.py
+│   ├── dataset.py
 │   ├── evaluate.py
-│   └── common.py
+│   ├── metrics.py
+│   ├── train_donut.py
+│   └── train_trocr.py
 │
 ├── experiments/                            # Experiment Result
-│   ├── donut_v1/
+│   ├── trocr_v1/
 │   │   ├── checkpoints/
 │   │   ├── metrics.json
 │   │   └── config.yaml
-│   └── trocr_v1/
+│   │
+│   └── donut_v1/
 │
 ├── models/
 │   ├── Donut/

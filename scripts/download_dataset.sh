@@ -31,6 +31,10 @@ mv ../data/raw/landlord/test_v2/test ../data/raw/landlord/test/images/
 mv ../data/raw/landlord/train_v2/train ../data/raw/landlord/train/images/
 mv ../data/raw/landlord/validation_v2/validation ../data/raw/landlord/validation/images
 
+rm -rf ../data/raw/landlord/test_v2
+rm -rf ../data/raw/landlord/train_v2
+rm -rf ../data/raw/landlord/validation_v2
+
 mv ../data/raw/landlord/written_name_test_v2.csv ../data/raw/landlord/test/label.csv
 mv ../data/raw/landlord/written_name_train_v2.csv ../data/raw/landlord/train/label.csv
 mv ../data/raw/landlord/written_name_validation_v2.csv ../data/raw/landlord/validation/label.csv
