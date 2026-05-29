@@ -3,7 +3,9 @@ kaggle
 kagglehub[hf-datasets]
 numpy>=1.24
 pillow>=9.0
+pandas>=2.0
 sentencepiece
+streamlit>=1.30
 torch>=2.0
 torchvision
 transformers>=4.35

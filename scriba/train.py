@@ -5,6 +5,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Optional
 
+from .checkpoints import publish_latest
 from .config import default_data_paths
 from .engines.trainer import TrainerConfig, build_trainer
 from .logging import setup_logging
@@ -37,6 +38,7 @@ def build_argparser() -> argparse.ArgumentParser:
     p.add_argument("--fp16", action="store_true")
     p.add_argument("--bf16", action="store_true")
     p.add_argument("--logging-steps", type=int, default=50)
+    p.add_argument("--publish-latest", action="store_true")
     return p
 
 
@@ -98,8 +100,9 @@ def main(argv: Optional[list[str]] = None) -> None:
     trainer.train()
     trainer.save_model(str(output_dir / "model"))
     processor.save_pretrained(str(output_dir / "processor"))
+    if args.publish_latest:
+        publish_latest(arch=args.arch, run_dir=output_dir)
 
 
 if __name__ == "__main__":
     main()
-

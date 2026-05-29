@@ -12,10 +12,13 @@ Scriba/
 ├── data/                      # Local datasets (git ignored), .gitkeep keeps folder
 │   └── raw/landlord/{train,validation,test}/...
 ├── runs/                      # Training outputs (git ignored), .gitkeep keeps folder
+├── models/                    # Default model pointers (models/<arch>/latest)
 ├── scripts/                   # One-off helpers (e.g. download dataset)
 ├── utils/                     # Small reusable helpers (optional)
 └── scriba/                    # Main Python package
     ├── train.py               # Entry: python -m scriba.train
+    ├── infer.py               # Entry: python -m scriba.infer
+    ├── webapp.py              # Entry: streamlit run scriba/webapp.py
     ├── eval/                  # Entry: python -m scriba.eval
     ├── engines/               # Trainer/loop abstraction
     ├── models/                # Each model in its own folder
@@ -25,50 +28,57 @@ Scriba/
 
 ```
 ## Quickstart
-## Instruction (Train)
+
 ### 1. Install dependencies
-### 1. Download the training data
+
 ```bash
-python -m venv venv
+python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 ```
 
 ### 2. Download the dataset (optional)
 
-You can download the Kaggle dataset using:
-You can download the provided training dataset using the script:
-
+```bash
 chmod 600 ./scripts/download_dataset.sh
 bash ./scripts/download_dataset.sh
-chmod 600 ./scripts/download_dataset.sh
-**Optional**: If you prefer, you can also prepare your own dataset and place it inside the data/ folder.
-### 3. Train
-
-TrOCR:
-
-```bash
-python -m scriba.train --arch trocr
 ```
 
-Donut:
+### 3. Train (and publish a default checkpoint)
+
+This will create `runs/<run_name>/` and also publish a symlink to `models/<arch>/latest`.
 
 ```bash
-python -m scriba.train --arch donut --max-target-length 256
+python3 -m scriba.train --arch trocr --publish-latest
+python3 -m scriba.train --arch donut --max-target-length 256 --publish-latest
 ```
 
-### 4. Evaluate
+### 4. Inference (CLI)
+
+If `models/<arch>/latest` exists, it will be used automatically.
 
 ```bash
-python -m scriba.eval --arch trocr --split test
-python -m scriba.eval --arch donut --split test
+python3 -m scriba.infer --arch trocr --image path/to/image.jpg
+python3 -m scriba.infer --arch donut --image path/to/image.jpg
+```
+
+### 5. Web UI (comparison + runs dashboard)
+
+```bash
+streamlit run scriba/webapp.py
+```
+
+### 6. Evaluate
+
+```bash
+python3 -m scriba.eval --arch trocr --split test
+python3 -m scriba.eval --arch donut --split test
 ```
 
 If you trained a run under `runs/<run_name>/model`:
 
 ```bash
-python -m scriba.eval --arch trocr --model-dir runs/<run_name>/model --split test
+python3 -m scriba.eval --arch trocr --model-dir runs/<run_name>/model --split test
 ```
-## Instruction (Inference)
 
 ## References
