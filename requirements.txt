@@ -1,2 +1,9 @@
+accelerate>=0.20
 kaggle
 kagglehub[hf-datasets]
+numpy>=1.24
+pillow>=9.0
+sentencepiece
+torch>=2.0
+torchvision
+transformers>=4.35
