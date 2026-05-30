@@ -53,7 +53,16 @@ python3 -m scriba.train --arch trocr --publish-latest
 python3 -m scriba.train --arch donut --max-target-length 256 --publish-latest
 ```
 
-### 4. Inference (CLI)
+### 4. Download pretrained into ./models (optional)
+
+This will save a local copy under `models/<arch>/<name>/{model,processor}`.
+
+```bash
+python3 -m scriba.download --arch trocr --pretrained microsoft/trocr-base-handwritten --set-latest
+python3 -m scriba.download --arch donut --pretrained naver-clova-ix/donut-base --set-latest
+```
+
+### 5. Inference (CLI)
 
 If `models/<arch>/latest` exists, it will be used automatically.
 
@@ -62,13 +71,13 @@ python3 -m scriba.infer --arch trocr --image path/to/image.jpg
 python3 -m scriba.infer --arch donut --image path/to/image.jpg
 ```
 
-### 5. Web UI (comparison + runs dashboard)
+### 6. Web UI (comparison + runs dashboard)
 
 ```bash
 streamlit run scriba/webapp.py
 ```
 
-### 6. Evaluate
+### 7. Evaluate
 
 ```bash
 python3 -m scriba.eval --arch trocr --split test
