@@ -7,7 +7,7 @@ from .model_store import ensure_pretrained_saved
 
 
 def build_argparser() -> argparse.ArgumentParser:
-    p = argparse.ArgumentParser(prog="python -m scriba.download")
+    p = argparse.ArgumentParser(prog="python -m apps.cli.download")
     p.add_argument("--arch", required=True, choices=["trocr", "donut"])
     p.add_argument("--pretrained", required=True)
     p.add_argument("--name", default=None)
@@ -28,4 +28,3 @@ def main(argv: Optional[list[str]] = None) -> None:
 
 if __name__ == "__main__":
     main()
-

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Any, Optional
 
 from transformers import Seq2SeqTrainer, Seq2SeqTrainingArguments
@@ -27,6 +27,8 @@ class TrainerConfig:
     load_best_model_at_end: bool = True
     metric_for_best_model: str = "cer"
     greater_is_better: bool = False
+    report_to: list[str] = field(default_factory=list)
+    run_name: Optional[str] = None
 
 
 def build_trainer(
@@ -57,7 +59,8 @@ def build_trainer(
         load_best_model_at_end=cfg.load_best_model_at_end,
         metric_for_best_model=cfg.metric_for_best_model,
         greater_is_better=cfg.greater_is_better,
-        report_to=[],
+        report_to=cfg.report_to,
+        run_name=cfg.run_name,
     )
 
     if generation_max_length is not None:

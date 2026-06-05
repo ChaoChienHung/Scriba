@@ -7,8 +7,8 @@ from typing import Optional
 
 from transformers import VisionEncoderDecoderModel
 
-from .checkpoints import latest_checkpoint_dir, project_root, publish_latest
-from .registry import get_model_factory
+from scriba.checkpoints import latest_checkpoint_dir, project_root, publish_latest
+from scriba.registry import get_model_factory
 
 
 @dataclass(frozen=True)
@@ -100,4 +100,3 @@ def resolve_model_dir(
 
     p = arch_root(arch) / selection
     return p if p.exists() else None
-

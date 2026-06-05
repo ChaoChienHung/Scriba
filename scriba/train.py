@@ -1,12 +1,16 @@
 from __future__ import annotations
 
 import argparse
+import json
+import os
+import sys
 from datetime import datetime
 from pathlib import Path
 from typing import Optional
 
 from .checkpoints import publish_latest
 from .config import default_data_paths
+from .distributed import is_main_process
 from .engines.trainer import TrainerConfig, build_trainer
 from .logging import setup_logging
 from .preprocessing.dataset import OCRCsvDataset, OCRDataCollator
@@ -39,6 +43,12 @@ def build_argparser() -> argparse.ArgumentParser:
     p.add_argument("--bf16", action="store_true")
     p.add_argument("--logging-steps", type=int, default=50)
     p.add_argument("--publish-latest", action="store_true")
+    p.add_argument(
+        "--report-to",
+        default="",
+        help="Comma-separated list for HF Trainer report_to (e.g. wandb,tensorboard). Empty disables.",
+    )
+    p.add_argument("--run-name-hf", default=None, help="Override HF Trainer run_name (defaults to --run-name).")
     return p
 
 
@@ -76,6 +86,37 @@ def main(argv: Optional[list[str]] = None) -> None:
     output_dir = Path(args.output_dir) if args.output_dir else (project_root / "runs" / run_name)
     output_dir.mkdir(parents=True, exist_ok=True)
 
+    report_to = [x.strip() for x in str(args.report_to).split(",") if x.strip()]
+    hf_run_name = args.run_name_hf or run_name
+
+    if is_main_process():
+        cfg = {
+            "arch": args.arch,
+            "pretrained": args.pretrained,
+            "run_name": run_name,
+            "output_dir": str(output_dir),
+            "train_csv": str(train_csv),
+            "train_images_dir": str(train_images_dir),
+            "val_csv": str(val_csv),
+            "val_images_dir": str(val_images_dir),
+            "max_target_length": max_target_length,
+            "epochs": args.epochs,
+            "lr": args.lr,
+            "train_bs": args.train_bs,
+            "eval_bs": args.eval_bs,
+            "fp16": bool(args.fp16),
+            "bf16": bool(args.bf16),
+            "logging_steps": args.logging_steps,
+            "publish_latest": bool(args.publish_latest),
+            "report_to": report_to,
+            "hf_run_name": hf_run_name,
+            "argv": sys.argv,
+            "env": {
+                "CUDA_VISIBLE_DEVICES": os.environ.get("CUDA_VISIBLE_DEVICES"),
+            },
+        }
+        (output_dir / "config.json").write_text(json.dumps(cfg, ensure_ascii=False, indent=2), encoding="utf-8")
+
     trainer_cfg = TrainerConfig(
         output_dir=str(output_dir),
         per_device_train_batch_size=args.train_bs,
@@ -85,6 +126,8 @@ def main(argv: Optional[list[str]] = None) -> None:
         fp16=args.fp16,
         bf16=args.bf16,
         logging_steps=args.logging_steps,
+        report_to=report_to,
+        run_name=hf_run_name,
     )
 
     trainer = build_trainer(
@@ -98,10 +141,11 @@ def main(argv: Optional[list[str]] = None) -> None:
     )
 
     trainer.train()
-    trainer.save_model(str(output_dir / "model"))
-    processor.save_pretrained(str(output_dir / "processor"))
-    if args.publish_latest:
-        publish_latest(arch=args.arch, run_dir=output_dir)
+    if is_main_process():
+        trainer.save_model(str(output_dir / "model"))
+        processor.save_pretrained(str(output_dir / "processor"))
+        if args.publish_latest:
+            publish_latest(arch=args.arch, run_dir=output_dir)
 
 
 if __name__ == "__main__":

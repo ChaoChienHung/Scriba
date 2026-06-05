@@ -1,16 +1,23 @@
 # TODO
 
+## 現有優點（請保持不退化）
+
+- `scriba/` 是 core library；可執行應用（API/Web/CLI）集中在 `apps/`
+- `runs/<run_name>/` 是唯一實驗單位（可追溯、可重現）
+- `models/<arch>/latest` 是預設模型指標（symlink），推論/比較預設都以此為準
+- `apps/api` 與 `apps/web` 採 API-first（UI 只做呈現與互動）
+
 ## P0（先把研究流程跑順）
 
-- [ ] 加入統一推論入口（`python -m scriba.infer`），支援 TrOCR/Donut、單張圖/資料夾、輸出 JSONL
+- [ ] 加入統一推論入口（`python -m apps.cli.infer`），支援 TrOCR/Donut、單張圖/資料夾、輸出 JSONL
 - [ ] 改進頁面整體視覺設計與使用者體驗，優化介面的美觀度與易用性
-- [ ] 加入 Streamlit Web UI（3 個 tab：Inference / Comparison / Training Metrics）
+- [ ] 加入 Web UI（FastAPI + Next.js，3 個頁：Inference / Comparison / Training Metrics）
   - [ ] Tab 1 Inference：單一模型推論，顯示更多資訊（source、latency、raw/json、可調 decoding 參數）
   - [ ] Tab 2 Comparison：預設 2 個模型，可按 + 增加到最多 4 個；同一 input 橫向比對輸出與 latency
   - [ ] Tab 3 Training Metrics：讀取 runs/<run_name>/ 的訓練紀錄（trainer_state.json 等），畫 line chart/table
   - [ ] Web 端支援 pretrained 一鍵下載到 `models/<arch>/<name>/{model,processor}`，並可設成 `models/<arch>/latest`
 - [ ] 改進 training metrics 的同步機制與訓練流程的日誌記錄功能，並統一參數/指標/日誌條目的命名規範
-- [ ] 定義並落地 models 慣例（`models/<arch>/latest`）
+- [ ] 補齊 models 慣例的文件與驗證（`models/<arch>/latest`）
 - [ ] 將資料集格式寫成明確規範（CSV 欄位、相對路徑規則、split 命名）並在 `data/` 放範例
 - [ ] 增加「小型 smoke dataset」與 smoke 測試（確保 train/eval 端到端不會壞）
 - [ ] `runs/<run_name>/` 產物結構固定化（metrics.json、hparams.json、samples/）
@@ -28,6 +35,8 @@
 - [ ] 加入基礎單元測試（metrics、dataset schema inference）
 - [ ] 整理 requirements（CPU/GPU 分離、可選 extras）
 - [ ] 封裝成可安裝套件（`pip install -e .`，是否要導入 `pyproject.toml`）
+- [ ] Web UI 部署：支援單台 GPU server 多人使用（並發、資源/快取策略、日誌）
+- [ ] API 認證：支援簡單 token（先）與 SSO/OAuth（後）
 
 ## 實驗想法（可直接做）
 

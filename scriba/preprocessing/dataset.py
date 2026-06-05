@@ -56,11 +56,13 @@ class OCRCsvDataset(Dataset[dict[str, Any]]):
         max_target_length: int,
         image_column: Optional[str] = None,
         text_column: Optional[str] = None,
+        return_metadata: bool = False,
     ) -> None:
         self.csv_path = Path(csv_path)
         self.images_dir = Path(images_dir)
         self.processor = processor
         self.max_target_length = max_target_length
+        self.return_metadata = return_metadata
 
         schema = infer_csv_schema(self.csv_path)
         self.image_column = image_column or schema.image_column
@@ -110,10 +112,17 @@ class OCRCsvDataset(Dataset[dict[str, Any]]):
         if pad_id is not None and getattr(self.processor.tokenizer, "pad_token_id", None) is not None:
             labels[labels == self.processor.tokenizer.pad_token_id] = -100
 
-        return {
+        out: dict[str, Any] = {
             "pixel_values": pixel_values,
             "labels": labels,
         }
+        if self.return_metadata:
+            out["meta"] = {
+                "image_path": str(image_path),
+                "text": text,
+                "row": row,
+            }
+        return out
 
 
 @dataclass(frozen=True)

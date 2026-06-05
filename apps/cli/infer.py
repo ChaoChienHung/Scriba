@@ -7,11 +7,11 @@ from typing import Any, Optional
 
 from PIL import Image
 
-from .inference import run_inference
+from scriba.inference import run_inference
 
 
 def build_argparser() -> argparse.ArgumentParser:
-    p = argparse.ArgumentParser(prog="python -m scriba.infer")
+    p = argparse.ArgumentParser(prog="python -m apps.cli.infer")
     p.add_argument("--arch", required=True, choices=["trocr", "donut"])
     p.add_argument("--checkpoint-dir", default=None)
     p.add_argument("--pretrained", default=None)
@@ -99,4 +99,3 @@ def main(argv: Optional[list[str]] = None) -> None:
 
 if __name__ == "__main__":
     main()
-
