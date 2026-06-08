@@ -78,20 +78,15 @@
   - API schema 相容策略 → 必須同步更新 `docs/api-compat.md` 與消費端（web/client）
   - 設計決策或評估方法學（為什麼/怎麼比較）→ 必須同步更新 `docs/dev-notes.md`
 
-## 專屬指令處理（更新文件）
+## 指令處理：更新項目文檔
 
-當使用者提出「請協助更新項目的相關文檔」或類似需求時，必須遵守以下流程：
+當使用者提出「請協助更新項目的相關文檔」（或語意等同）時，採以下流程處理：
 
-- 先盤點 repo 內所有文件狀態（root + `/docs/` + 其他子模塊內 README/規範文件）
-- 依 [docs/doc-map.md](file:///Users/bytedance/Desktop/Ludwig/Scriba/docs/doc-map.md) 的文件屬性與關係，判定優先級並分批更新
-- 不要求一次做完所有文件；先更新高優先級入口與契約文件，再逐步擴散
-  - 入口：`README.md`
-  - 不可退化約束：`AGENTS.md`
-  - 工作流：`docs/workflows.md`
-  - API 相容：`docs/api-compat.md`
-  - 模塊邊界：`docs/modules.md`
-  - 角色/協作：`docs/roles.md`
-  - 交付驗收：`docs/checklist.md`
+- 先盤點：掃描本文件的 Doc Map 區塊內所有 `.md` 文件（優先關注 `README.md` / `AGENTS.md` / `TODO.md` / `docs/`）
+- 再篩選：比對本次改動影響範圍，列出「必須同步更新」的文檔清單
+- 優先級：先查 `docs/doc-map.md` 的文檔屬性與關係，優先更新高優先級與強約束文件（例如契約/工作流/系統規格）
+- 逐步完成：不要求一次性完成所有文檔調整；先完成高優先級文件的同步，再逐步補齊其餘文檔
+- 維持索引最新：任何新增/搬移/更名文檔，都必須同步更新 `docs/doc-map.md` 與本文件的 Doc Map 區塊
 
 ## 安全與隱私
 
