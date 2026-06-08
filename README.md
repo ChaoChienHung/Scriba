@@ -7,8 +7,19 @@ This repository serves as a **sandbox** for **building**, **training**, and **ev
 ## Project Rules
 
 - Immutable constraints / guardrails: see [AGENTS.md](file:///Users/bytedance/Desktop/Ludwig/Scriba/AGENTS.md)
-- Design decisions / experiment notes: see [DevNotes.md](file:///Users/bytedance/Desktop/Ludwig/Scriba/DevNotes.md)
+- Docs map (roles / modules / workflows / API compat / checklist): see [docs/doc-map.md](file:///Users/bytedance/Desktop/Ludwig/Scriba/docs/doc-map.md)
+- Design decisions / experiment notes: see [docs/dev-notes.md](file:///Users/bytedance/Desktop/Ludwig/Scriba/docs/dev-notes.md)
 - Roadmap / backlog: see [TODO.md](file:///Users/bytedance/Desktop/Ludwig/Scriba/TODO.md)
+
+## Documentation Map
+
+- Docs index: [docs/doc-map.md](file:///Users/bytedance/Desktop/Ludwig/Scriba/docs/doc-map.md)
+- Roles / RACI: [docs/roles.md](file:///Users/bytedance/Desktop/Ludwig/Scriba/docs/roles.md)
+- Modules (boundaries & I/O): [docs/modules.md](file:///Users/bytedance/Desktop/Ludwig/Scriba/docs/modules.md)
+- Workflows (train/eval/infer/model lifecycle): [docs/workflows.md](file:///Users/bytedance/Desktop/Ludwig/Scriba/docs/workflows.md)
+- API versioning & compatibility: [docs/api-compat.md](file:///Users/bytedance/Desktop/Ludwig/Scriba/docs/api-compat.md)
+- Delivery checklist: [docs/checklist.md](file:///Users/bytedance/Desktop/Ludwig/Scriba/docs/checklist.md)
+- Design decisions / experiment notes: [docs/dev-notes.md](file:///Users/bytedance/Desktop/Ludwig/Scriba/docs/dev-notes.md)
 
 ## Model Comparison
 

@@ -10,14 +10,16 @@
 - `README.md`：對外入口（How to use）
   - 放快速上手、常用指令、啟動方式、路徑約定的使用方式
   - 不放長期研究計畫與實驗紀錄
-- `DevNotes.md`：設計決策 + 評估/benchmark + 實驗紀錄（Living doc）
+- `docs/`：可演進但需要被固定成文字的規格與協作流程（roles/modules/workflows/api-compat/checklist）
+- `docs/dev-notes.md`：設計決策 + 評估/benchmark + 實驗紀錄（Living doc）
   - 放「為什麼這樣設計」、評估/benchmark 規格、實驗模板/紀錄、坑與已知問題
   - 不複製貼上 `AGENTS.md` 的 non-regression 條款；需要時只引用 `AGENTS.md`
+- `TODO.md`：Roadmap / Backlog（可勾選、可驗收）
 
 小規則（寫文件時用來決策要放哪裡）：
 - 任何「必須永遠成立」的句子 → 放 `AGENTS.md`
 - 任何「第一次使用者要怎麼跑」 → 放 `README.md`
-- 任何「為什麼這樣設計／這次實驗怎麼做、結果如何」 → 放 `DevNotes.md`
+- 任何「為什麼這樣設計／這次實驗怎麼做、結果如何」 → 放 `docs/dev-notes.md`
 
 ## Evaluation Tiers
 

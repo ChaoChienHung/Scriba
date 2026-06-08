@@ -48,7 +48,7 @@ python -m llm.eval --run_dir runs/<run_name>
 - `runs/<run_name>/eval/exact_match_eval.jsonl`
 - `runs/<run_name>/eval/smoke_generations.jsonl`
 
-Benchmark 設計與實驗記錄：`DevNotes.md`
+Benchmark 設計與實驗記錄：`docs/dev-notes.md`
 
 ## Outputs / Checkpoints（常用路徑）
 
@@ -97,4 +97,3 @@ python -m llm.tools.merge_lora --adapter_dir runs/<run_name>/adapter --output_di
 ## TODO 導航
 
 接下來的工程化與研究方向集中在 `TODO.md`（例如：tokenizer、custom loop（AMP/DDP）、evaluation pipeline、單測、lint/CI、License）。 
-
