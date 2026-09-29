@@ -1,0 +1,4 @@
+torch
+kaggle
+transformers
+kagglehub[hf-datasets]
